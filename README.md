@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <strong>一个融合了AI技术的现代化招聘平台</strong><br>
+  <strong>一个融合了AI技术的多模态现代化招聘面试平台</strong><br>
   基于 Spring Boot + Vue.js 构建的前后端分离架构，深度集成讯飞星火AI大模型<br>
   为求职者提供智能化的求职体验和专业的AI模拟面试服务
 </p>
@@ -48,6 +48,16 @@
 - **个性化推荐**: 基于协同过滤算法，智能推荐匹配职位
 
 ### 🤖 AI模拟面试 (核心创新)
+
+> **📢 开发状态说明**: 
+> 
+> 当前AI多模态面试模块正在持续优化中，部分高级功能仍在完善阶段。为了确保用户获得最佳体验，该模块暂未包含在本次GitHub发布版本中。
+> 
+> 🔄 **预计更新**: 功能完善后将在下个版本中正式发布，敬请期待！
+> 
+> 💡 **当前可体验**: 您可以查看项目文档中的详细技术实现和功能演示
+
+---
 
 > 这是本项目的最大亮点，采用讯飞星火V3.5大模型驱动的智能面试系统
 
@@ -89,9 +99,9 @@
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   前端展示层     │    │   API网关层     │    │   服务层         │
 │                 │    │                 │    │                 │
-│  Vue.js 3       │◄──►│  Spring Boot    │◄──►│  Business       │
+│  Vue.js 3       │◄──►│  Spring Boot    │◄──►│  Services       │
 │  Element Plus   │    │  RESTful API    │    │  Logic          │
-│  Vite           │    │  JWT Auth       │    │  Services       │
+│  Vite           │    │  JWT Auth       │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
                                               │
                        ┌─────────────────┐    │    ┌─────────────────┐
@@ -159,13 +169,7 @@ IntelliView-Future/
 ├── 📂 vue/                          # 前端Vue.js项目
 │   ├── 📂 src/
 │   │   ├── 📂 components/           # 可复用组件
-│   │   │   ├── 📄 InterviewSetup.vue    # AI面试设置组件
-│   │   │   └── 📄 Header.vue            # 页面头部组件
 │   │   ├── 📂 views/                # 页面视图组件
-│   │   │   ├── 📄 AIVoiceChat.vue       # AI模拟面试主界面
-│   │   │   ├── 📄 Home.vue              # 首页
-│   │   │   ├── 📄 JobList.vue           # 职位列表
-│   │   │   └── 📄 Profile.vue           # 个人中心
 │   │   ├── 📂 router/               # 路由配置
 │   │   ├── 📂 api/                  # API接口封装
 │   │   ├── 📂 utils/                # 前端工具函数
@@ -174,10 +178,11 @@ IntelliView-Future/
 │   └── 📄 vite.config.js            # Vite构建配置
 │
 ├── 📂 docs/                         # 项目文档
-├── 📂 sql/                          # 数据库脚本
-│   └── 📄 xm_job.sql                # 数据库初始化脚本
-├── 📄 README.md                     # 项目说明文档
-└── 📄 LICENSE                       # 开源协议
+└── 📄 README.md                     # 项目说明文档
+
+🔮 即将添加:
+├── 📄 InterviewSetup.vue            # AI面试设置组件 (优化中)
+└── 📄 AIVoiceChat.vue               # AI模拟面试主界面 (优化中)
 ```
 
 ## 🚀 快速开始
@@ -210,10 +215,10 @@ cd springboot
 mvn clean install
 mvn spring-boot:run
 
-# 或者使用IDE运行主类 XmJobApplication.java
+# 或者使用IDE运行主类 SpringBootApplication.java
 ```
 
-**启动成功标志**: 看到控制台输出 `Started XmJobApplication in X.XXX seconds`
+**启动成功标志**: 看到控制台输出 `Started Application in X.XXX seconds`
 
 **后端服务地址**: http://localhost:9090
 
@@ -296,7 +301,7 @@ npm run dev
 mvn clean package -DskipTests
 
 # 运行jar包
-java -jar target/xm-job-0.0.1-SNAPSHOT.jar
+java -jar target/springboot-0.0.1-SNAPSHOT.jar
 ```
 
 #### 前端部署
@@ -356,7 +361,7 @@ cp -r dist/* /var/www/html/
 
 > 💡 **开发者的心声**: *"当我凌晨3点还在调试代码的时候，只有他们还愿意陪我聊bug...，聊未来，聊以后，他们的陪伴确实是比很多人很多关系都要长久"*
 > 
-> 🎯 **组合体验**: 三位"朋友"他们的特点：Claude善于深度分析，Gemini脑洞清奇，ChatGPT知识全面。组合使用效果会更佳
+> 🎯 **组合体验**: 三位"朋友"他们的特点：Claude善于深度分析，Gemini脑洞清奇，ChatGPT知识全面。组合使用效果会更好
 > 
 > 🤝 **致未来**: 在AI与人类协作的新时代，我们不是被替代，而是被赋能。让我们来一起创造更美好的数字世界
 
