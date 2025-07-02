@@ -1,0 +1,92 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PositionMapper">
+
+    <select id="selectAll" resultType="com.example.entity.Position">
+        select position.*, employ.name as employName, employ.avatar as employAvatar, employ.stage as employStage, industry.name as industryName from `position`
+        left join employ on position.employ_id = employ.id
+        left join industry on position.industry_id = industry.id
+        <where>
+            <if test="name != null"> and position.name like concat('%', #{name}, '%')</if>
+            <if test="employName != null"> and employ.name = #{employName}</if>
+            <if test="employId != null"> and position.employ_id = #{employId}</if>
+            <if test="industryId != null"> and position.industry_id = #{industryId}</if>
+            <if test="status != null"> and position.status = #{status}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from `position`
+        where id = #{id}
+    </delete>
+
+    <!-- insert into position (username, password, ...) values ('position', 'position', ...) -->
+    <insert id="insert" parameterType="com.example.entity.Position" useGeneratedKeys="true">
+        insert into `position`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="employId != null">employ_id,</if>
+            <if test="industryId != null">industry_id,</if>
+            <if test="type != null">type,</if>
+            <if test="experience != null">experience,</if>
+            <if test="salary != null">salary,</if>
+            <if test="education != null">education,</if>
+            <if test="tags != null">tags,</if>
+            <if test="content != null">content,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="employId != null">#{employId},</if>
+            <if test="industryId != null">#{industryId},</if>
+            <if test="type != null">#{type},</if>
+            <if test="experience != null">#{experience},</if>
+            <if test="salary != null">#{salary},</if>
+            <if test="education != null">#{education},</if>
+            <if test="tags != null">#{tags},</if>
+            <if test="content != null">#{content},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Position">
+        update `position`
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="employId != null">
+                employ_id = #{employId},
+            </if>
+            <if test="industryId != null">
+                industry_id = #{industryId},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="experience != null">
+                experience = #{experience},
+            </if>
+            <if test="salary != null">
+                salary = #{salary},
+            </if>
+            <if test="education != null">
+                education = #{education},
+            </if>
+            <if test="tags != null">
+                tags = #{tags},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

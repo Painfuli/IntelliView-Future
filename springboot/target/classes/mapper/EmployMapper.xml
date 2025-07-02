@@ -1,0 +1,93 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EmployMapper">
+
+    <select id="selectAll" resultType="com.example.entity.Employ">
+        select employ.*, industry.name as industryName from `employ`
+        left join industry on employ.industry_id = industry.id
+        <where>
+            <if test="name != null"> and employ.name like concat('%', #{name}, '%')</if>
+            <if test="status != null"> and employ.status = #{status}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from `employ`
+        where id = #{id}
+    </delete>
+
+    <!-- insert into employ (username, password, ...) values ('employ', 'employ', ...) -->
+    <insert id="insert" parameterType="com.example.entity.Employ" useGeneratedKeys="true">
+        insert into `employ`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="username != null">username,</if>
+            <if test="password != null">password,</if>
+            <if test="name != null">name,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="role != null">role,</if>
+            <if test="city != null">city,</if>
+            <if test="address != null">address,</if>
+            <if test="industryId != null">industry_id,</if>
+            <if test="scale != null">scale,</if>
+            <if test="stage != null">stage,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="username != null">#{username},</if>
+            <if test="password != null">#{password},</if>
+            <if test="name != null">#{name},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="role != null">#{role},</if>
+            <if test="city != null">#{city},</if>
+            <if test="address != null">#{address},</if>
+            <if test="industryId != null">#{industryId},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="stage != null">#{stage},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Employ">
+        update `employ`
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+            <if test="role != null">
+                role = #{role},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="industryId != null">
+                industry_id = #{industryId},
+            </if>
+            <if test="scale != null">
+                scale = #{scale},
+            </if>
+            <if test="stage != null">
+                stage = #{stage},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
