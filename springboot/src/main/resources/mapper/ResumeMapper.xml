@@ -1,0 +1,96 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ResumeMapper">
+
+    <select id="selectAll" resultType="com.example.entity.Resume">
+        select * from `resume`
+        <where>
+            <if test="userId != null"> and user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from `resume`
+        where id = #{id}
+    </delete>
+
+    <!-- insert into resume (username, password, ...) values ('resume', 'resume', ...) -->
+    <insert id="insert" parameterType="com.example.entity.Resume" useGeneratedKeys="true">
+        insert into `resume`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="username != null">username,</if>
+            <if test="sex != null">sex,</if>
+            <if test="salary != null">salary,</if>
+            <if test="education != null">education,</if>
+            <if test="experience != null">experience,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="eduExps != null">edu_exps,</if>
+            <if test="workExps != null">work_exps,</if>
+            <if test="proExps != null">pro_exps,</if>
+            <if test="userId != null">user_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="username != null">#{username},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="salary != null">#{salary},</if>
+            <if test="education != null">#{education},</if>
+            <if test="experience != null">#{experience},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="eduExps != null">#{eduExps},</if>
+            <if test="workExps != null">#{workExps},</if>
+            <if test="proExps != null">#{proExps},</if>
+            <if test="userId != null">#{userId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Resume">
+        update `resume`
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="salary != null">
+                salary = #{salary},
+            </if>
+            <if test="education != null">
+                education = #{education},
+            </if>
+            <if test="experience != null">
+                experience = #{experience},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="eduExps != null">
+                edu_exps = #{eduExps},
+            </if>
+            <if test="workExps != null">
+                work_exps = #{workExps},
+            </if>
+            <if test="proExps != null">
+                pro_exps = #{proExps},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

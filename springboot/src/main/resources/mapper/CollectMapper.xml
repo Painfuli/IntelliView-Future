@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CollectMapper">
+
+    <select id="selectAll" resultType="com.example.entity.Collect">
+        select * from `collect`
+        <where>
+            <if test="studentId != null"> and student_id = #{studentId}</if>
+            <if test="positionId != null"> and position_id = #{positionId}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from `collect`
+        where id = #{id}
+    </delete>
+
+    <!-- insert into collect (username, password, ...) values ('collect', 'collect', ...) -->
+    <insert id="insert" parameterType="com.example.entity.Collect" useGeneratedKeys="true">
+        insert into `collect`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="positionId != null">position_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="positionId != null">#{positionId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Collect">
+        update `collect`
+        <set>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

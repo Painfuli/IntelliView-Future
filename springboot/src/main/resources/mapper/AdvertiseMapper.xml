@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AdvertiseMapper">
+
+    <select id="selectAll" resultType="com.example.entity.Advertise">
+        select advertise.*,
+               position.name as positionName, position.salary as positionSalary, position.education as positionEducation,
+               employ.name as employName
+        from `advertise`
+        left join position on advertise.position_id = position.id
+        left join employ on position.employ_id = employ.id
+        <where>
+            <if test="location != null"> and location like concat('%', #{location}, '%')</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from `advertise`
+        where id = #{id}
+    </delete>
+
+    <!-- insert into advertise (username, password, ...) values ('advertise', 'advertise', ...) -->
+    <insert id="insert" parameterType="com.example.entity.Advertise" useGeneratedKeys="true">
+        insert into `advertise`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="img != null">img,</if>
+            <if test="positionId != null">position_id,</if>
+            <if test="location != null">location,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="img != null">#{img},</if>
+            <if test="positionId != null">#{positionId},</if>
+            <if test="location != null">#{location},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Advertise">
+        update `advertise`
+        <set>
+            <if test="img != null">
+                img = #{img},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
